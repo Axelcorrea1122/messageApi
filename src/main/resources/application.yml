@@ -1,0 +1,67 @@
+server:
+    port: ${APP_PORT}
+spring:
+    main:
+        allow-bean-definition-overriding: true
+    application:
+        name: message-api
+    datasource:
+        driverClassName: org.postgresql.Driver
+        password: ${DS_PASSWORD}
+        testWhileIdle: true
+        url: ${DS_URL}
+        username: ${DS_USERNAME}
+        validationQuery: SELECT 1
+    devtools:
+        restart:
+            enabled: true
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: ${DB_DDL_AUTO}
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+            use-new-id-generator-mappings: true
+        properties:
+            hibernate:
+                show_sql: false
+                temp:
+                  use_jdbc_metadata_defaults: false
+        
+    liquibase:
+        change-log: ${LIQUIBASE_CHANGELOG_PATH}
+sso:
+    username: ${SSO_USERNAME}
+    pasword: ${SSO_PASSWORD}
+    master:
+        client_id: ${SSO_MASTER_CLIENT_ID}
+        uri_token: /auth/realms/master/protocol/openid-connect/token
+    grant_type: password
+    url:
+        base: ${SSO_URL_BASE}
+        user:
+            registration: ${SSO_URL_USER_REGISTRATION}
+            actions:
+                verify_email: /send-verify-email
+                execute_actions_email: /execute-actions-email
+        add_user_to_group: /auth/admin/realms/${KEYCLOAK_REALM}
+        list_groups: /auth/admin/realms/${KEYCLOAK_REALM}/groups
+keycloak:
+    auth-server-url: ${SSO_URL_BASE}${AUTH_SERVER_URL}
+    realm: ${KEYCLOAK_REALM}
+    ssl-required: external
+    resource: messageApi
+    public-client: true
+    cors: true
+    use-resource-role-mappings: true
+    bearer-only: true
+firebase:
+    cloud:
+        messaging:
+            url:
+                base: ${FCM_URL_BASE}
+                send: /send
+            key: ${FCM_KEY}
+#management:
+#    health:
+#        pubsub:
+#            enabled: false
