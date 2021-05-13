@@ -9,7 +9,7 @@ import sube.apps.messageApi.entities.ClientAccessKey;
 
 public interface ClientAccesKeyRepository extends JpaRepository<ClientAccessKey, Long>{
 	
-	@Query("select c from ClientAccessKey c where client_id = :client_id")
+	@Query("select c from ClientAccessKey c where lower(client_id) = :client_id")
 	public ClientAccessKey findByClientId(@Param("client_id") String clientId);
 	
 }
