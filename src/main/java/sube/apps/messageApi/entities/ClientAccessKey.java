@@ -9,16 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@SequenceGenerator(name = "seq_client_access_key", initialValue = 1, allocationSize = 1, sequenceName = "seq_client_access_key")
-@Table(name= "client_access_key")
+@SequenceGenerator(name = "SEQ_CLIENT_ACCESS_KEY", initialValue = 1, allocationSize = 1, sequenceName = "SEQ_CLIENT_ACCESS_KEY")
+@Table(name = "CLIENT_ACCESS_KEY", uniqueConstraints = {
+		@UniqueConstraint(name = "UK_CLIENT_ACCESS_KEY", columnNames = { "clientId" })})
 public class ClientAccessKey {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_client_access_key")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CLIENT_ACCESS_KEY")
 	private Long Id;
 	private String clientId;
 	private String key;
@@ -28,11 +30,10 @@ public class ClientAccessKey {
 	private Date insertionDate;
 	
 	
-	public ClientAccessKey(String clientId, String key, Date insertionDate) {
+	public ClientAccessKey(String clientId, String key) {
 		super();
 		this.clientId = clientId;
 		this.key = key;
-		this.insertionDate = insertionDate;
 	}
 	
 	
@@ -59,6 +60,4 @@ public class ClientAccessKey {
 	public void setInsertionDate(Date insertionDate) {
 		this.insertionDate = insertionDate;
 	}
-	
-	
 }

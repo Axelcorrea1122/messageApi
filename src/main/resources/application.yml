@@ -28,6 +28,7 @@ spring:
                   use_jdbc_metadata_defaults: false
         
     liquibase:
+        enabled: true
         change-log: ${LIQUIBASE_CHANGELOG_PATH}
 sso:
     username: ${SSO_USERNAME}

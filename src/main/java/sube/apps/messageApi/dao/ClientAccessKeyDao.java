@@ -19,8 +19,14 @@ public class ClientAccessKeyDao{
 	}
 	
 	public ClientAccessKey save(String key, String clientId) {
-		ClientAccessKey clientKey = new ClientAccessKey(clientId, key, new Date());
-		System.out.println("AX LOG: " + clientKey.getClientId() + " " + clientKey.getKey() + " " + clientKey.getInsertionDate());
+		ClientAccessKey clientKey = clientAccesKeyRepository.findByClientId(clientId);
+		if(clientKey == null) {
+			clientKey = new ClientAccessKey();
+			clientKey.setClientId(clientId);
+		}
+		clientKey.setKey(key);
+		clientKey.setInsertionDate(new Date());
+
 		return clientAccesKeyRepository.save(clientKey);
 	}
 	
