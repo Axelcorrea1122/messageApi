@@ -32,7 +32,6 @@ public class RestTemplateExceptionHandler extends DefaultResponseErrorHandler {
 			LOGGER.error("Fallo en exceptionHandler: ", ex);
 			return ResponseEntity.status(503).body(new ApiError_v2(ErrorMessage.SERVICE_UNAVAILABLE_ERROR.toString(),
 					ErrorMessage.SERVICE_UNAVAILABLE_ERROR.getErrorMessage()));
-
 		}
 
 	}
