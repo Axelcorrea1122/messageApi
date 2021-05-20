@@ -1,10 +1,14 @@
-FROM maven:3-jdk-8-alpine
+# syntax=docker/dockerfile:experimental
+FROM maven:3.6.3-jdk-11 AS build
+WORKDIR /build
+COPY pom.xml .
+COPY src ./src
+RUN --mount=type=cache,target=/root/.m2/repository mvn clean package -DskipTests
+ 
 
-WORKDIR /usr/src/app
-
-COPY . /usr/src/app
-RUN mvn package
-
-ENV PORT 5000
-EXPOSE $PORT
-CMD [ "sh", "-c", "mvn -Dserver.port=${PORT} spring-boot:run" ]
+FROM openjdk:11-jre
+ENV JAVA_OPTS=""
+EXPOSE 8082
+WORKDIR /app
+CMD exec java $JAVA_OPTS -jar messageApi.jar
+COPY --from=build /build/target/messageApi-*.jar /app/messageApi.jar

@@ -1,0 +1,37 @@
+version: '1.0'
+services:
+  userapi:
+    container_name: messageApi
+    image: messageApi
+    build: ./
+    ports:
+      - "8082:8082"
+    depends_on:
+      - dbpostgresql
+    env_file:
+      - messageApi-variables.env
+ 
+  dbpostgresql:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    
+    env_file:
+      - dbpostgresql-variables.env
+  
+
+  keycloak:
+      image: gcr.io/ns-sube-nonprod/nssa-keycloak:1.0.1
+      env_file:
+      - keycloak-variables.env
+      ports:
+        - 8080:8080
+      depends_on:
+        - dbpostgresql 
+      volumes:
+        - ./assets/nssa-realm-complete.json:/tmp/nssa-realm-complete.json
+volumes:
+  pgdata: {}

@@ -65,17 +65,12 @@ public class MessageApiService {
 		HttpHeaders headers = createHeaderJsonWithAuthKey(clientAccessKey.getKey());
 		HttpEntity<?> entity = new HttpEntity<>(req, headers);
 		try {
-			ResponseEntity<MobilePushResponse> responseEntity = new RestTemplate().exchange(fcmUri, HttpMethod.POST,
+			new RestTemplate().exchange(fcmUri, HttpMethod.POST,
 					entity, MobilePushResponse.class);
 		} catch (HttpClientErrorException e) {
-			Map<String, String> error = new LinkedHashMap<String, String>();
-			error.put("type", e.getClass().getCanonicalName());
-			error.put("status", String.valueOf(e.getRawStatusCode()));
-			error.put("message", e.getMessage());
 			return ResponseEntity.badRequest().body(new ApiError_v2(ErrorMessage.FCM_PUSH_NOTIFICATION_ERROR.toString(),
-					ErrorMessage.FCM_PUSH_NOTIFICATION_ERROR.getErrorMessage(), error));
+					ErrorMessage.FCM_PUSH_NOTIFICATION_ERROR.getErrorMessage()));
 		}
-		System.out.println(req);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 }

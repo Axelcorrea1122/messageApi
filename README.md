@@ -1,11 +1,14 @@
-### Java Spring template project
+# Message Api 
+##### Versión: 1.0.0
+Microservicios encargado de configurar cliente/keys para enviar notificaciones push a los distintos productos a traves del servicio de Firebase Cloud Messaging (FCM)
 
-This project is based on a GitLab [Project Template](https://docs.gitlab.com/ee/gitlab-basics/create-project.html).
+### Accesos.
 
-Improvements can be proposed in the [original project](https://gitlab.com/gitlab-org/project-templates/spring).
+Documentación Swagger Staging:  http://localhost:8081/swagger-ui/#/
 
-### CI/CD with Auto DevOps
+Postman collection: https://www.getpostman.com/collections/34fdccee8d903fcbc370
 
-This template is compatible with [Auto DevOps](https://docs.gitlab.com/ee/topics/autodevops/).
-
-If Auto DevOps is not already enabled for this project, you can [turn it on](https://docs.gitlab.com/ee/topics/autodevops/#enabling-auto-devops) in the project settings.
+### Modo de gestión
+1. Pedir Token en Keycloak
+2. Utilizar endpoint POST configureClientKey para registrar key asociada al cliente obtenido por el token
+3. Utilizar endpoint PUT sendPushMessage para enviar notificación al device token es decir hacia el producto especificado
