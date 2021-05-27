@@ -30,22 +30,6 @@ spring:
     liquibase:
         enabled: true
         change-log: ${LIQUIBASE_CHANGELOG_PATH}
-sso:
-    username: ${SSO_USERNAME}
-    pasword: ${SSO_PASSWORD}
-    master:
-        client_id: ${SSO_MASTER_CLIENT_ID}
-        uri_token: /auth/realms/master/protocol/openid-connect/token
-    grant_type: password
-    url:
-        base: ${SSO_URL_BASE}
-        user:
-            registration: ${SSO_URL_USER_REGISTRATION}
-            actions:
-                verify_email: /send-verify-email
-                execute_actions_email: /execute-actions-email
-        add_user_to_group: /auth/admin/realms/${KEYCLOAK_REALM}
-        list_groups: /auth/admin/realms/${KEYCLOAK_REALM}/groups
 keycloak:
     auth-server-url: ${SSO_URL_BASE}${AUTH_SERVER_URL}
     realm: ${KEYCLOAK_REALM}
@@ -61,8 +45,3 @@ firebase:
             url:
                 base: ${FCM_URL_BASE}
                 send: /send
-            key: ${FCM_KEY}
-#management:
-#    health:
-#        pubsub:
-#            enabled: false

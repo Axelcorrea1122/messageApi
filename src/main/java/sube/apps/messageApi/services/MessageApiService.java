@@ -1,9 +1,5 @@
 package sube.apps.messageApi.services;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -16,13 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import sube.apps.messageApi.context.ApiError_v2;
 import sube.apps.messageApi.context.ErrorMessage;
 import sube.apps.messageApi.dao.ClientAccessKeyDao;
 import sube.apps.messageApi.dtos.MobilePushRequest;
 import sube.apps.messageApi.dtos.MobilePushResponse;
+import sube.apps.messageApi.dtos.PushMessageRequest;
 import sube.apps.messageApi.entities.ClientAccessKey;
 import sube.apps.messageApi.entities.UserDetails;
 
@@ -55,15 +50,15 @@ public class MessageApiService {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
-	public ResponseEntity<?> sendFcmPush(MobilePushRequest req, UserDetails userdetails) {
+	public ResponseEntity<?> sendFcmPush(PushMessageRequest req, UserDetails userdetails) {
 
-		ClientAccessKey clientAccessKey = clientAccessKeyDao.getClientById(userdetails.getClientId());
+		ClientAccessKey clientAccessKey = clientAccessKeyDao.getClientById(req.getClient());
 		if (clientAccessKey == null) {
 			return ResponseEntity.badRequest().body(new ApiError_v2(ErrorMessage.BAD_REQUEST_ERROR_KEY.toString(),
 					ErrorMessage.BAD_REQUEST_ERROR_KEY.getErrorMessage()));
 		}
 		HttpHeaders headers = createHeaderJsonWithAuthKey(clientAccessKey.getKey());
-		HttpEntity<?> entity = new HttpEntity<>(req, headers);
+		HttpEntity<?> entity = new HttpEntity<>(new MobilePushRequest(req.getTo(), req.getNotification(), req.getData()), headers);
 		try {
 			new RestTemplate().exchange(fcmUri, HttpMethod.POST,
 					entity, MobilePushResponse.class);

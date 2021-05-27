@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiResponses;
 import sube.apps.messageApi.context.ApiError_v2;
 import sube.apps.messageApi.dtos.ConfigureClientKeyRequest;
 import sube.apps.messageApi.dtos.MobilePushRequest;
+import sube.apps.messageApi.dtos.PushMessageRequest;
 import sube.apps.messageApi.entities.CurrentUser;
 import sube.apps.messageApi.entities.UserDetails;
 import sube.apps.messageApi.services.MessageApiService;
@@ -39,7 +40,7 @@ public class MessageApiWS {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 400, message = "Error en petición", response = ApiError_v2.class) })
-	public ResponseEntity<?> sendPushMessage(@RequestBody MobilePushRequest req, @CurrentUser UserDetails userdetails) {
+	public ResponseEntity<?> sendPushMessage( @RequestBody PushMessageRequest req , @CurrentUser UserDetails userdetails) {
 		return messageService.sendFcmPush(req, userdetails);
 	}
 }
