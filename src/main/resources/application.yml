@@ -34,7 +34,7 @@ keycloak:
     auth-server-url: ${SSO_URL_BASE}${AUTH_SERVER_URL}
     realm: ${KEYCLOAK_REALM}
     ssl-required: external
-    resource: messageApi
+    resource: messageApiService
     public-client: true
     cors: true
     use-resource-role-mappings: true
