@@ -4,7 +4,7 @@ NS_GCP ?= ns-sube-nonprod
 
 DOCKER_TAG ?= v0.0.1
 
-DOCKER_IMAGE ?= ${DOCKER_REGISTRY_GCP}/${NS_GCP}/user-api:${DOCKER_TAG}
+DOCKER_IMAGE ?= ${DOCKER_REGISTRY_GCP}/${NS_GCP}/message-api:${DOCKER_TAG}
 
 .DEFAULT_GOAL:=help
 

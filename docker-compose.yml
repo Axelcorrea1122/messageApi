@@ -22,16 +22,5 @@ services:
     env_file:
       - dbpostgresql-variables.env
   
-
-  keycloak:
-      image: gcr.io/ns-sube-nonprod/nssa-keycloak:1.0.1
-      env_file:
-      - keycloak-variables.env
-      ports:
-        - 8080:8080
-      depends_on:
-        - dbpostgresql 
-      volumes:
-        - ./assets/nssa-realm-complete.json:/tmp/nssa-realm-complete.json
 volumes:
   pgdata: {}
