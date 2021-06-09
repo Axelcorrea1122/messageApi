@@ -52,8 +52,6 @@ public class UserDetailsArgumentResolver implements HandlerMethodArgumentResolve
 			userId = Long.valueOf(otherClaims.get("userId").toString());
 			
 		}
-		
-		System.out.println(token);
 
 		String clientId = token.getIssuedFor();
 		return new UserDetails(token.getId(), userId, token.getPreferredUsername(), token.getGivenName(), token.getFamilyName(),
