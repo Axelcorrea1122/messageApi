@@ -2,7 +2,7 @@ DOCKER_REGISTRY_GCP ?= gcr.io
 
 NS_GCP ?= ns-sube-nonprod
 
-DOCKER_TAG ?= v0.0.2
+DOCKER_TAG ?= v0.0.3
 
 DOCKER_IMAGE ?= ${DOCKER_REGISTRY_GCP}/${NS_GCP}/message-api:${DOCKER_TAG}
 
