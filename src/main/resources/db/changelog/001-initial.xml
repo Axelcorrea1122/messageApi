@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.10.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
-    <changeSet author="acorrea (generated)" id="1620877895429-1">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="acorrea (generated)" id="1623866364161-1">
         <createTable tableName="client_access_key">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="client_access_key_pkey"/>
@@ -12,28 +12,10 @@
             <column name="key" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="acorrea (generated)" id="1620877895429-2">
+    <changeSet author="acorrea (generated)" id="1623866364161-2">
         <addUniqueConstraint columnNames="client_id" constraintName="uk_client_access_key" tableName="client_access_key"/>
     </changeSet>
-    <changeSet author="acorrea (generated)" id="1620877895429-3">
-        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="seq_client_access_key" startValue="1"/>
-    </changeSet>
-    <changeSet author="acorrea (generated)" id="1620878141687-1">
-        <createTable tableName="client_access_key">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="client_access_key_pkey"/>
-            </column>
-            <column name="client_id" type="VARCHAR(255)"/>
-            <column name="insertion_date" type="TIMESTAMP WITHOUT TIME ZONE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="key" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="acorrea (generated)" id="1620878141687-2">
-        <addUniqueConstraint columnNames="client_id" constraintName="uk_client_access_key" tableName="client_access_key"/>
-    </changeSet>
-    <changeSet author="acorrea (generated)" id="1620878141687-3">
+    <changeSet author="acorrea (generated)" id="1623866364161-3">
         <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="seq_client_access_key" startValue="1"/>
     </changeSet>
 </databaseChangeLog>

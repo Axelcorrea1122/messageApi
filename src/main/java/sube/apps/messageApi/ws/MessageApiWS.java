@@ -31,8 +31,8 @@ public class MessageApiWS {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
 			@ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 400, message = "Error en petición", response = ApiError_v2.class) })
-	public ResponseEntity<?> configureClientKey(@RequestBody ConfigureClientKeyRequest key, @CurrentUser UserDetails userdetails) {
-		return messageService.saveClientKey(key.getKey(), userdetails.getClientId());
+	public ResponseEntity<?> configureClientKey(@RequestBody ConfigureClientKeyRequest params) {
+		return messageService.saveClientKey(params.getKey(), params.getClientId());
 	}
 
 	@PutMapping(path = "/sendPushMessage", produces = "application/json")

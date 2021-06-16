@@ -24,8 +24,6 @@ import sube.apps.messageApi.entities.UserDetails;
 @Service
 public class MessageApiService {
 
-//	@Value("${firebase.cloud.messaging.key}")
-//	private String fcmKey;
 	@Value("${firebase.cloud.messaging.url.base}${firebase.cloud.messaging.url.send}")
 	private String fcmUri;
 	@Autowired
