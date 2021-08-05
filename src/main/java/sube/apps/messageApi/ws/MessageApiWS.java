@@ -13,7 +13,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import sube.apps.messageApi.context.ApiError_v2;
 import sube.apps.messageApi.dtos.ConfigureClientKeyRequest;
-import sube.apps.messageApi.dtos.MobilePushRequest;
 import sube.apps.messageApi.dtos.PushMessageRequest;
 import sube.apps.messageApi.entities.CurrentUser;
 import sube.apps.messageApi.entities.UserDetails;
